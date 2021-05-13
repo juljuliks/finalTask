@@ -14,6 +14,8 @@ var _maskPhone = _interopRequireDefault(require("./modules/maskPhone"));
 
 var _showHints = _interopRequireDefault(require("./modules/showHints"));
 
+var _toggleConsultPopup = _interopRequireDefault(require("./modules/toggleConsultPopup"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 (0, _toggleMenu["default"])();
@@ -23,3 +25,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 (0, _togglePrivacyPopup["default"])();
 (0, _maskPhone["default"])();
 (0, _showHints["default"])();
+(0, _toggleConsultPopup["default"])();

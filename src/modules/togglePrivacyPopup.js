@@ -1,6 +1,5 @@
 const togglePrivacyPopup = () => {
-    const main = document.getElementById('main'),
-          privacyPopup = document.querySelector('.popup-privacy');
+    const privacyPopup = document.querySelector('.popup-privacy');
     window.addEventListener('click', (e) => {
         if (e.target.matches('.link-privacy')) {
             privacyPopup.style.visibility = 'visible';
