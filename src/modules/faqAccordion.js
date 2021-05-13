@@ -2,12 +2,22 @@ const faqAccordion = () => {
 
   const accordeonItems = document.querySelectorAll('div.accordion>ul>li')
 
-  const toggleAccordion = (e) => {
+  const classRemover = () => {
     accordeonItems.forEach(el => {
-      el.children[0].classList.remove('msg-active')
+        if (el.children[0].classList.contains('msg-active')) {
+            el.children[0].classList.remove('msg-active')
+        }
     })
+  }
+  
+  const toggleAccordion = (e) => {
     if (e.target.closest('.title_block')) {
-      e.target.classList.toggle('msg-active');
+      if (e.target.classList.contains('msg-active')) {
+        e.target.classList.remove('msg-active');
+      } else {
+        classRemover()
+        e.target.classList.add('msg-active');
+      }
     }
   }
 

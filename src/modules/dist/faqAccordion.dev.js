@@ -8,13 +8,22 @@ exports["default"] = void 0;
 var faqAccordion = function faqAccordion() {
   var accordeonItems = document.querySelectorAll('div.accordion>ul>li');
 
-  var toggleAccordion = function toggleAccordion(e) {
+  var classRemover = function classRemover() {
     accordeonItems.forEach(function (el) {
-      el.children[0].classList.remove('msg-active');
+      if (el.children[0].classList.contains('msg-active')) {
+        el.children[0].classList.remove('msg-active');
+      }
     });
+  };
 
+  var toggleAccordion = function toggleAccordion(e) {
     if (e.target.closest('.title_block')) {
-      e.target.classList.toggle('msg-active');
+      if (e.target.classList.contains('msg-active')) {
+        e.target.classList.remove('msg-active');
+      } else {
+        classRemover();
+        e.target.classList.add('msg-active');
+      }
     }
   };
 
