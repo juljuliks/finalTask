@@ -16,7 +16,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_toggleMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/toggleMenu */ \"./src/modules/toggleMenu.js\");\n\n\n\n(0,_modules_toggleMenu__WEBPACK_IMPORTED_MODULE_0__.default)();\n\n//# sourceURL=webpack://relax-live/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_toggleMenu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/toggleMenu */ \"./src/modules/toggleMenu.js\");\n/* harmony import */ var _modules_toggleNumber__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/toggleNumber */ \"./src/modules/toggleNumber.js\");\n\n\n\n\n(0,_modules_toggleMenu__WEBPACK_IMPORTED_MODULE_0__.default)();\n(0,_modules_toggleNumber__WEBPACK_IMPORTED_MODULE_1__.default)();\n\n//# sourceURL=webpack://relax-live/./src/index.js?");
 
 /***/ }),
 
@@ -27,6 +27,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar toggleMenu = function toggleMenu() {\n  var menu = document.querySelector('.popup-dialog-menu');\n  window.addEventListener('click', function (e) {\n    if (e.target.matches('.menu__icon')) {\n      menu.style.transform = 'translate3d(0px, 0px, 0px)';\n    } else if (e.target.matches('.close-menu') || e.target.matches('.menu-link') || e.target.closest('.main')) {\n      menu.style.transform = 'translate3d(645px, 0px, 0px)';\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (toggleMenu);\n\n//# sourceURL=webpack://relax-live/./src/modules/toggleMenu.js?");
+
+/***/ }),
+
+/***/ "./src/modules/toggleNumber.js":
+/*!*************************************!*\
+  !*** ./src/modules/toggleNumber.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar toggleNumber = function toggleNumber() {\n  var arrowBtn = document.querySelector('.header-contacts__arrow').querySelector('img'),\n      phoneAccord = document.querySelector('.header-contacts__phone-number-accord'),\n      phoneNumber = document.querySelector('.header-contacts__phone-number-accord a');\n  arrowBtn.addEventListener('click', function () {\n    var currentOpacity = getComputedStyle(phoneNumber).opacity;\n\n    if (currentOpacity === '0') {\n      phoneNumber.style.display = 'block';\n      phoneAccord.style.position = 'static';\n      phoneNumber.style.opacity = '1';\n      arrowBtn.style.transform = 'rotateZ(180deg)';\n    } else {\n      phoneAccord.style.position = 'relative';\n      phoneNumber.style.opacity = '0';\n      phoneNumber.style.display = 'none';\n      arrowBtn.style.transform = 'rotateZ(0deg)';\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (toggleNumber);\n\n//# sourceURL=webpack://relax-live/./src/modules/toggleNumber.js?");
 
 /***/ })
 
