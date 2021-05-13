@@ -3,7 +3,7 @@ const togglePrivacyPopup = () => {
     window.addEventListener('click', (e) => {
         if (e.target.matches('.link-privacy')) {
             privacyPopup.style.visibility = 'visible';
-        } else if (!e.target.closest('.popup-dialog-privacy')) {
+        } else if (!e.target.closest('.popup-dialog-privacy') || e.target.closest('.close')) {
             privacyPopup.style.visibility = 'hidden';
         }
     })
