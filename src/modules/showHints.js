@@ -14,7 +14,7 @@ const showHints = () => {
     document.head.appendChild(style);
     const showHint = (e) => {
         if (e.target.closest('.formula-item')) {
-            if (e.target.getBoundingClientRect().top < 150 || e.target.getBoundingClientRect().bottom < 600) {
+            if (e.target.getBoundingClientRect().top < 150 && e.target.getBoundingClientRect().bottom < 600) {
                 e.target.parentNode.firstElementChild.classList.add('formula-item-popup-rotate')
             }
             e.target.parentNode.parentNode.classList.add('active-item')
