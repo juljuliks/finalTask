@@ -8,6 +8,7 @@ import togglePrivacyPopup from './modules/togglePrivacyPopup';
 import maskPhone from './modules/maskPhone';
 import showHints from './modules/showHints';
 import toggleConsultPopup from './modules/toggleConsultPopup';
+import faqAccordion from './modules/faqAccordion';
 
 
 
@@ -19,3 +20,4 @@ togglePrivacyPopup();
 maskPhone();
 showHints();
 toggleConsultPopup();
+faqAccordion();
