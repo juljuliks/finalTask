@@ -1,5 +1,4 @@
 const toggleMenu = () => {
-    console.log(screen.width);
     const menu = document.querySelector('.popup-dialog-menu');
     window.addEventListener('click', (e) => {
 
