@@ -18,6 +18,8 @@ var _toggleConsultPopup = _interopRequireDefault(require("./modules/toggleConsul
 
 var _faqAccordion = _interopRequireDefault(require("./modules/faqAccordion"));
 
+var _repairTypesSlider = _interopRequireDefault(require("./modules/repairTypesSlider"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 (0, _toggleMenu["default"])();
@@ -29,3 +31,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 (0, _showHints["default"])();
 (0, _toggleConsultPopup["default"])();
 (0, _faqAccordion["default"])();
+(0, _repairTypesSlider["default"])();

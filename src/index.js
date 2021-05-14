@@ -9,6 +9,7 @@ import maskPhone from './modules/maskPhone';
 import showHints from './modules/showHints';
 import toggleConsultPopup from './modules/toggleConsultPopup';
 import faqAccordion from './modules/faqAccordion';
+import repairTypesSlider from './modules/repairTypesSlider';
 
 
 
@@ -21,3 +22,4 @@ maskPhone();
 showHints();
 toggleConsultPopup();
 faqAccordion();
+repairTypesSlider();
