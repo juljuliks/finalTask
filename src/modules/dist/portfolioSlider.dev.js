@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 
 var portfolioSlider = function portfolioSlider() {
-  var portfolio = document.getElementById('portfolio');
-  var arrowLeft = document.getElementById('portfolio-arrow_left'),
+  var portfolio = document.getElementById('portfolio'),
+      arrowLeft = document.getElementById('portfolio-arrow_left'),
       mobileLeftBtn = document.getElementById('portfolio-arrow-mobile_right'),
       mobileRightBtn = document.getElementById('portfolio-arrow-mobile_left'),
       portfolioSlider = document.querySelector('.portfolio-slider'),
@@ -16,12 +16,11 @@ var portfolioSlider = function portfolioSlider() {
       sliderItemsMobile = Array.from(portfolioSliderMobile.children);
   var total = portfolio.querySelector('.slider-counter-content__total');
   total.innerText = sliderItemsMobile.length;
+  var current = portfolio.querySelector('.slider-counter-content__current');
+  var count = 1;
   var width = sliderItems[0].offsetWidth;
   var widthMobile = 352;
   var currentPosition = 0;
-  var currentPositionMobile = 0;
-  var current = portfolio.querySelector('.slider-counter-content__current');
-  var count = 1;
   mobileRightBtn.style.display = 'none';
   mobileLeftBtn.style.zIndex = '20';
   mobileRightBtn.style.zIndex = '20';
@@ -87,6 +86,7 @@ var portfolioSlider = function portfolioSlider() {
       if (current.innerText == +total.innerText) {
         current.innerText = 1;
         currentPosition = 0;
+        mobileRightBtn.style.display = 'none';
       }
 
       portfolioWrapMobiile.style.transform = "translateX(".concat(-currentPosition, "px)");

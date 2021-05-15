@@ -1,26 +1,27 @@
 const portfolioSlider = () => {
-  const portfolio = document.getElementById('portfolio');
-  const arrowLeft = document.getElementById('portfolio-arrow_left'),
+  const portfolio = document.getElementById('portfolio'),
+    arrowLeft = document.getElementById('portfolio-arrow_left'),
     mobileLeftBtn = document.getElementById('portfolio-arrow-mobile_right'),
     mobileRightBtn = document.getElementById('portfolio-arrow-mobile_left'),
     portfolioSlider = document.querySelector('.portfolio-slider'),
     sliderItems = Array.from(portfolioSlider.children),
     portfolioSliderMobile = document.querySelector('.portfolio-slider-mobile'),
     sliderItemsMobile = Array.from(portfolioSliderMobile.children);
-    let total = portfolio.querySelector('.slider-counter-content__total')
-    total.innerText = sliderItemsMobile.length
-  let width = sliderItems[0].offsetWidth;
-  let widthMobile = 352;
 
-  let currentPosition = 0;
-  let currentPositionMobile = 0;
-
+  const total = portfolio.querySelector('.slider-counter-content__total')
+  total.innerText = sliderItemsMobile.length
   let current = portfolio.querySelector('.slider-counter-content__current');
   let count = 1;
+
+  const width = sliderItems[0].offsetWidth;
+  const widthMobile = 352;
+
+  let currentPosition = 0;
+
   mobileRightBtn.style.display = 'none'
   mobileLeftBtn.style.zIndex = '20';
   mobileRightBtn.style.zIndex = '20';
-  let style = document.createElement('style');
+  const style = document.createElement('style');
   style.innerHTML = `
     .portfolio-wrap{
         position: relative;
@@ -81,10 +82,12 @@ const portfolioSlider = () => {
       if (current.innerText == +total.innerText) {
         current.innerText = 1;
         currentPosition = 0
+        mobileRightBtn.style.display = 'none'
       }
       portfolioWrapMobiile.style.transform = `translateX(${-currentPosition}px)`
     }
   }
+
 
   portfolio.addEventListener('click', portfolioSliderHandler)
 }
