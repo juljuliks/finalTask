@@ -14,6 +14,7 @@ const documentsHandler = () => {
   let currentPosition = 0;
   total.innerText = trasparensyItems.length
 
+  let styleWidth =  document.querySelector('.popup-transparency-slider__slide').offsetWidth;
   const style = document.createElement('style');
   style.innerHTML = `
     .popupTransparencyWrap {
@@ -24,7 +25,7 @@ const documentsHandler = () => {
         transition:transform 0.5s !important;
     }
     .popupTransparencyWrap .popup-transparency-slider__slide{
-        min-width:432px;
+        min-width: ${styleWidth}px;
     }
 `
   document.head.appendChild(style)
@@ -32,7 +33,7 @@ const documentsHandler = () => {
 
   if (screen.width <= 1024) {
     const transparencyStyle = document.createElement('style');
-    style.innerHTML = `
+    transparencyStyle.innerHTML = `
       .transparency-slider{
           display: -webkit-box !important;
           display: -ms-flexbox !important;
@@ -50,7 +51,7 @@ const documentsHandler = () => {
   } 
   if (screen.width < 768) {
     const transparencyStyle = document.createElement('style');
-    style.innerHTML = `
+    transparencyStyle.innerHTML = `
     .transparency-slider{
         display: -webkit-box !important;
         display: -ms-flexbox !important;
@@ -78,6 +79,8 @@ const documentsHandler = () => {
   const imgWidth = transparancyWrap.querySelector('img').offsetWidth
   arrowLeftTablet.style.display = 'none';
 
+//   transparancyWrap.style.flexDirection = 'row'
+  console.log(transparancyWrap);
   let currentWidth = +getComputedStyle(document.querySelector('.transparency-item')).minWidth.replace(/\D/g, '');
 
 
@@ -86,15 +89,16 @@ const documentsHandler = () => {
     if (e.target.closest('.transparency-item__img')) {
       arrowRight.style.display = 'flex'
       arrowLeft.style.display = 'none'
-      transparancyWrap.style.transform = 'translateX(${currentPosition}px)'
+    //   transparancyWrap.style.transform = 'translateX(${currentPosition}px)'
       transparancyPopup.style.visibility = 'visible'
     } else if (!e.target.closest('.popup-dialog-transparency') || e.target.closest('.close') && e.target.closest('.popup-transparency')) {
       transparancyPopup.style.visibility = 'hidden'
     } else if (e.target.closest('#transparency_right')) {
+        console.log(imgWidth);
       count++
       arrowLeft.style.display = 'flex'
       current.innerText = count;
-      currentPosition = currentPosition - imgWidth;
+      currentPosition = currentPosition - styleWidth;
       if (count > 3) {
         count = 1
         current.innerText = count;
@@ -103,9 +107,10 @@ const documentsHandler = () => {
       }
       transparancyWrap.style.transform = `translateX(${currentPosition}px)`
     } else if (e.target.closest('#transparency_left')) {
+        console.log('left');
       count--
       current.innerText = count;
-      currentPosition = currentPosition + imgWidth;
+      currentPosition = currentPosition + styleWidth;
       if (current.innerText == 1) {
         arrowLeft.style.display = 'none'
       }

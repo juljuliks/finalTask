@@ -18,20 +18,21 @@ var documentsHandler = function documentsHandler() {
   current.innerText = count;
   var currentPosition = 0;
   total.innerText = trasparensyItems.length;
+  var styleWidth = document.querySelector('.popup-transparency-slider__slide').offsetWidth;
   var style = document.createElement('style');
-  style.innerHTML = "\n    .popupTransparencyWrap {\n        position: relative;\n        display: flex;\n        width: 100%;\n        height:100%;\n        transition:transform 0.5s !important;\n    }\n    .popupTransparencyWrap .popup-transparency-slider__slide{\n        min-width:432px;\n    }\n";
+  style.innerHTML = "\n    .popupTransparencyWrap {\n        position: relative;\n        display: flex;\n        width: 100%;\n        height:100%;\n        transition:transform 0.5s !important;\n    }\n    .popupTransparencyWrap .popup-transparency-slider__slide{\n        min-width: ".concat(styleWidth, "px;\n    }\n");
   document.head.appendChild(style);
 
   if (screen.width <= 1024) {
     var transparencyStyle = document.createElement('style');
-    style.innerHTML = "\n      .transparency-slider{\n          display: -webkit-box !important;\n          display: -ms-flexbox !important;\n          display: flex !important;\n          flex-wrap: nowrap !important;\n          transition:transform 0.5s !important;\n      }\n      .transparency-slider .transparency-item{\n          min-width: 744px !important;\n      }\n      .transparency-slider-wrap{\n          overflow: hidden !important;\n      }";
+    transparencyStyle.innerHTML = "\n      .transparency-slider{\n          display: -webkit-box !important;\n          display: -ms-flexbox !important;\n          display: flex !important;\n          flex-wrap: nowrap !important;\n          transition:transform 0.5s !important;\n      }\n      .transparency-slider .transparency-item{\n          min-width: 744px !important;\n      }\n      .transparency-slider-wrap{\n          overflow: hidden !important;\n      }";
     document.head.appendChild(transparencyStyle);
   }
 
   if (screen.width < 768) {
     var _transparencyStyle = document.createElement('style');
 
-    style.innerHTML = "\n    .transparency-slider{\n        display: -webkit-box !important;\n        display: -ms-flexbox !important;\n        display: flex !important;\n        flex-wrap: nowrap !important;\n        transition:transform 0.5s !important;\n    }\n    .transparency-slider .transparency-item{\n        min-width: 290px !important;\n    }\n    .transparency-slider-wrap{\n        overflow: hidden !important;\n    }";
+    _transparencyStyle.innerHTML = "\n    .transparency-slider{\n        display: -webkit-box !important;\n        display: -ms-flexbox !important;\n        display: flex !important;\n        flex-wrap: nowrap !important;\n        transition:transform 0.5s !important;\n    }\n    .transparency-slider .transparency-item{\n        min-width: 290px !important;\n    }\n    .transparency-slider-wrap{\n        overflow: hidden !important;\n    }";
     document.head.appendChild(_transparencyStyle);
   }
 
@@ -42,22 +43,25 @@ var documentsHandler = function documentsHandler() {
   var arrowRightTablet = document.querySelector('#transparency-arrow_right');
   var arrowLeftTablet = document.querySelector('#transparency-arrow_left');
   var imgWidth = transparancyWrap.querySelector('img').offsetWidth;
-  arrowLeftTablet.style.display = 'none';
+  arrowLeftTablet.style.display = 'none'; //   transparancyWrap.style.flexDirection = 'row'
+
+  console.log(transparancyWrap);
   var currentWidth = +getComputedStyle(document.querySelector('.transparency-item')).minWidth.replace(/\D/g, '');
 
   var transparencyBlockHandler = function transparencyBlockHandler(e) {
     if (e.target.closest('.transparency-item__img')) {
       arrowRight.style.display = 'flex';
-      arrowLeft.style.display = 'none';
-      transparancyWrap.style.transform = 'translateX(${currentPosition}px)';
+      arrowLeft.style.display = 'none'; //   transparancyWrap.style.transform = 'translateX(${currentPosition}px)'
+
       transparancyPopup.style.visibility = 'visible';
     } else if (!e.target.closest('.popup-dialog-transparency') || e.target.closest('.close') && e.target.closest('.popup-transparency')) {
       transparancyPopup.style.visibility = 'hidden';
     } else if (e.target.closest('#transparency_right')) {
+      console.log(imgWidth);
       count++;
       arrowLeft.style.display = 'flex';
       current.innerText = count;
-      currentPosition = currentPosition - imgWidth;
+      currentPosition = currentPosition - styleWidth;
 
       if (count > 3) {
         count = 1;
@@ -68,9 +72,10 @@ var documentsHandler = function documentsHandler() {
 
       transparancyWrap.style.transform = "translateX(".concat(currentPosition, "px)");
     } else if (e.target.closest('#transparency_left')) {
+      console.log('left');
       count--;
       current.innerText = count;
-      currentPosition = currentPosition + imgWidth;
+      currentPosition = currentPosition + styleWidth;
 
       if (current.innerText == 1) {
         arrowLeft.style.display = 'none';
