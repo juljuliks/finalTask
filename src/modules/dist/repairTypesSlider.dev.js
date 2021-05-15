@@ -11,10 +11,11 @@ var repairTypesSlider = function repairTypesSlider() {
       navItem = document.querySelectorAll('.repair-types-nav__item'),
       sliderItems = Array.from(slider.children),
       listRepair = document.querySelector('.nav-list-repair');
-  listRepair.style.transform = "translateX(0px)";
+  listRepair.style.transform = "translateX(0px)"; // console.log(document.querySelector('.repair-types-slider__slide').children[0].offsetHeight);
+
   var currentPosition = 0;
   var mobileTabsPosition = 0;
-  var imgHeight = 546;
+  var imgHeight = document.querySelector('.repair-types-slider__slide').children[0].offsetHeight;
   var count = 1;
   var style = document.createElement('style');
   style.innerHTML = "\n        .activeType: {\n            display: block;\n        }\n    ";
@@ -68,14 +69,14 @@ var repairTypesSlider = function repairTypesSlider() {
       elem.style.display = 'block';
       currentPosition = currentPosition - imgHeight;
 
-      if (currentPosition <= -elem.children.length * imgHeight) {
+      if (currentPosition <= -elem.children.length * imgHeight || currentPosition < -((+total.textContent - 1) * imgHeight)) {
         currentPosition = 0;
       }
 
       elem.style.transform = "translateY(".concat(currentPosition, "px)");
     } else if (e.target.closest('#repair-types-arrow_left')) {
       count = document.querySelector('.slider-counter-content__current');
-      var totalCount = +total.textContent; // let displayCount = (count.innerText == totalCount) ? count.innerText-- : count.innerText = (count.innerText < totalCount) ? count.innerText = 1 : count.innerText = (count.innerText == 1) ? count.innerText = --totalCount : count.innerText = ''
+      var totalCount = +total.textContent;
 
       var _displayCount = count.innerText < totalCount ? count.innerText == 1 ? count.innerText = totalCount : count.innerText > 1 ? count.innerText-- : count.innerText = 1 : count.innerText--;
 

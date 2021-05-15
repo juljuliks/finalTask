@@ -7,9 +7,10 @@ const repairTypesSlider = () => {
 
   listRepair.style.transform = `translateX(0px)`
 
+  // console.log(document.querySelector('.repair-types-slider__slide').children[0].offsetHeight);
   let currentPosition = 0;
   let mobileTabsPosition = 0;
-  const imgHeight = 546;
+  const imgHeight = document.querySelector('.repair-types-slider__slide').children[0].offsetHeight;
   let count = 1;
   const style = document.createElement('style');
   style.innerHTML = `
@@ -64,14 +65,13 @@ const repairTypesSlider = () => {
       const elem = document.querySelector('.activeType');
       elem.style.display = 'block'
       currentPosition = currentPosition - imgHeight;
-      if (currentPosition <= -elem.children.length * imgHeight) {
+      if (currentPosition <= -elem.children.length * imgHeight || currentPosition < -((+total.textContent - 1) *  imgHeight)) {
         currentPosition = 0
       }
       elem.style.transform = `translateY(${currentPosition}px)`
     } else if (e.target.closest('#repair-types-arrow_left')) {
       count = document.querySelector('.slider-counter-content__current');
       let totalCount = +total.textContent
-      // let displayCount = (count.innerText == totalCount) ? count.innerText-- : count.innerText = (count.innerText < totalCount) ? count.innerText = 1 : count.innerText = (count.innerText == 1) ? count.innerText = --totalCount : count.innerText = ''
       let displayCount = (count.innerText < totalCount) ? (count.innerText == 1) ? count.innerText = totalCount : (count.innerText > 1) ? count.innerText-- : count.innerText = 1 : count.innerText--
       const elem = document.querySelector('.activeType');
       elem.style.display = 'block'
