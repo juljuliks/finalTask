@@ -1,5 +1,6 @@
 const repairTypesSlider = () => {
-  const slider = document.querySelector('.repair-types-slider'),
+  const sliderBlock = document.getElementById('repair-types'),
+    slider = document.querySelector('.repair-types-slider'),
     navItem = document.querySelectorAll('.repair-types-nav__item'),
     sliderItems = Array.from(slider.children),
     listRepair = document.querySelector('.nav-list-repair');
@@ -68,6 +69,10 @@ const repairTypesSlider = () => {
       }
       elem.style.transform = `translateY(${currentPosition}px)`
     } else if (e.target.closest('#repair-types-arrow_left')) {
+      count = document.querySelector('.slider-counter-content__current');
+      let totalCount = +total.textContent
+      // let displayCount = (count.innerText == totalCount) ? count.innerText-- : count.innerText = (count.innerText < totalCount) ? count.innerText = 1 : count.innerText = (count.innerText == 1) ? count.innerText = --totalCount : count.innerText = ''
+      let displayCount = (count.innerText < totalCount) ? (count.innerText == 1) ? count.innerText = totalCount : (count.innerText > 1) ? count.innerText-- : count.innerText = 1 : count.innerText--
       const elem = document.querySelector('.activeType');
       elem.style.display = 'block'
       currentPosition = currentPosition + imgHeight;
@@ -101,7 +106,7 @@ const repairTypesSlider = () => {
       listRepair.style.transform = `translateX(${mobileTabsPosition}px)`
     }
   }
-  window.addEventListener('click', repairSliderHandler)
+  sliderBlock.addEventListener('click', repairSliderHandler)
 }
 
 export default repairTypesSlider;

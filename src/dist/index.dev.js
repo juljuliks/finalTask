@@ -20,6 +20,8 @@ var _faqAccordion = _interopRequireDefault(require("./modules/faqAccordion"));
 
 var _repairTypesSlider = _interopRequireDefault(require("./modules/repairTypesSlider"));
 
+var _portfolioSlider = _interopRequireDefault(require("./modules/portfolioSlider"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 (0, _toggleMenu["default"])();
@@ -32,3 +34,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 (0, _toggleConsultPopup["default"])();
 (0, _faqAccordion["default"])();
 (0, _repairTypesSlider["default"])();
+(0, _portfolioSlider["default"])();

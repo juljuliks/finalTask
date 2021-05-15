@@ -6,7 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 
 var repairTypesSlider = function repairTypesSlider() {
-  var slider = document.querySelector('.repair-types-slider'),
+  var sliderBlock = document.getElementById('repair-types'),
+      slider = document.querySelector('.repair-types-slider'),
       navItem = document.querySelectorAll('.repair-types-nav__item'),
       sliderItems = Array.from(slider.children),
       listRepair = document.querySelector('.nav-list-repair');
@@ -73,6 +74,11 @@ var repairTypesSlider = function repairTypesSlider() {
 
       elem.style.transform = "translateY(".concat(currentPosition, "px)");
     } else if (e.target.closest('#repair-types-arrow_left')) {
+      count = document.querySelector('.slider-counter-content__current');
+      var totalCount = +total.textContent; // let displayCount = (count.innerText == totalCount) ? count.innerText-- : count.innerText = (count.innerText < totalCount) ? count.innerText = 1 : count.innerText = (count.innerText == 1) ? count.innerText = --totalCount : count.innerText = ''
+
+      var _displayCount = count.innerText < totalCount ? count.innerText == 1 ? count.innerText = totalCount : count.innerText > 1 ? count.innerText-- : count.innerText = 1 : count.innerText--;
+
       var _elem = document.querySelector('.activeType');
 
       _elem.style.display = 'block';
@@ -114,7 +120,7 @@ var repairTypesSlider = function repairTypesSlider() {
     }
   };
 
-  window.addEventListener('click', repairSliderHandler);
+  sliderBlock.addEventListener('click', repairSliderHandler);
 };
 
 var _default = repairTypesSlider;
