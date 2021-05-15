@@ -30,7 +30,6 @@ const documentsHandler = () => {
 `
   document.head.appendChild(style)
 
-
   if (screen.width <= 1024) {
     const transparencyStyle = document.createElement('style');
     transparencyStyle.innerHTML = `
@@ -68,33 +67,25 @@ const documentsHandler = () => {
     document.head.appendChild(transparencyStyle)
   } 
 
-
   const currentInner = popupTransparencySlider.innerHTML;
   popupTransparencySlider.innerHTML = `<div class='popupTransparencyWrap'>${currentInner}</div>`;
 
   const transparencySlider = document.querySelector('.transparency-slider');
   const transparancyWrap = document.querySelector('.popupTransparencyWrap');
-  const arrowRightTablet = document.querySelector('#transparency-arrow_right');
   const arrowLeftTablet = document.querySelector('#transparency-arrow_left');
-  const imgWidth = transparancyWrap.querySelector('img').offsetWidth
   arrowLeftTablet.style.display = 'none';
 
-//   transparancyWrap.style.flexDirection = 'row'
   console.log(transparancyWrap);
   let currentWidth = +getComputedStyle(document.querySelector('.transparency-item')).minWidth.replace(/\D/g, '');
-
-
 
   const transparencyBlockHandler = (e) => {
     if (e.target.closest('.transparency-item__img')) {
       arrowRight.style.display = 'flex'
       arrowLeft.style.display = 'none'
-    //   transparancyWrap.style.transform = 'translateX(${currentPosition}px)'
       transparancyPopup.style.visibility = 'visible'
     } else if (!e.target.closest('.popup-dialog-transparency') || e.target.closest('.close') && e.target.closest('.popup-transparency')) {
       transparancyPopup.style.visibility = 'hidden'
     } else if (e.target.closest('#transparency_right')) {
-        console.log(imgWidth);
       count++
       arrowLeft.style.display = 'flex'
       current.innerText = count;
@@ -107,7 +98,6 @@ const documentsHandler = () => {
       }
       transparancyWrap.style.transform = `translateX(${currentPosition}px)`
     } else if (e.target.closest('#transparency_left')) {
-        console.log('left');
       count--
       current.innerText = count;
       currentPosition = currentPosition + styleWidth;
@@ -125,7 +115,6 @@ const documentsHandler = () => {
       }
       transparencySlider.style.transform = `translateX(${currentPosition}px)`
     } else if (e.target.closest('#transparency-arrow_left')) {
-      console.log(currentPosition);
       if (currentPosition == -currentWidth) {
         arrowLeftTablet.style.display = 'none'
       }

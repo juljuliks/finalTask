@@ -40,24 +40,19 @@ var documentsHandler = function documentsHandler() {
   popupTransparencySlider.innerHTML = "<div class='popupTransparencyWrap'>".concat(currentInner, "</div>");
   var transparencySlider = document.querySelector('.transparency-slider');
   var transparancyWrap = document.querySelector('.popupTransparencyWrap');
-  var arrowRightTablet = document.querySelector('#transparency-arrow_right');
   var arrowLeftTablet = document.querySelector('#transparency-arrow_left');
-  var imgWidth = transparancyWrap.querySelector('img').offsetWidth;
-  arrowLeftTablet.style.display = 'none'; //   transparancyWrap.style.flexDirection = 'row'
-
+  arrowLeftTablet.style.display = 'none';
   console.log(transparancyWrap);
   var currentWidth = +getComputedStyle(document.querySelector('.transparency-item')).minWidth.replace(/\D/g, '');
 
   var transparencyBlockHandler = function transparencyBlockHandler(e) {
     if (e.target.closest('.transparency-item__img')) {
       arrowRight.style.display = 'flex';
-      arrowLeft.style.display = 'none'; //   transparancyWrap.style.transform = 'translateX(${currentPosition}px)'
-
+      arrowLeft.style.display = 'none';
       transparancyPopup.style.visibility = 'visible';
     } else if (!e.target.closest('.popup-dialog-transparency') || e.target.closest('.close') && e.target.closest('.popup-transparency')) {
       transparancyPopup.style.visibility = 'hidden';
     } else if (e.target.closest('#transparency_right')) {
-      console.log(imgWidth);
       count++;
       arrowLeft.style.display = 'flex';
       current.innerText = count;
@@ -72,7 +67,6 @@ var documentsHandler = function documentsHandler() {
 
       transparancyWrap.style.transform = "translateX(".concat(currentPosition, "px)");
     } else if (e.target.closest('#transparency_left')) {
-      console.log('left');
       count--;
       current.innerText = count;
       currentPosition = currentPosition + styleWidth;
@@ -95,8 +89,6 @@ var documentsHandler = function documentsHandler() {
 
       transparencySlider.style.transform = "translateX(".concat(currentPosition, "px)");
     } else if (e.target.closest('#transparency-arrow_left')) {
-      console.log(currentPosition);
-
       if (currentPosition == -currentWidth) {
         arrowLeftTablet.style.display = 'none';
       }
