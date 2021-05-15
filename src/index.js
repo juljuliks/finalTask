@@ -12,6 +12,7 @@ import faqAccordion from './modules/faqAccordion';
 import repairTypesSlider from './modules/repairTypesSlider';
 import portfolioSlider from './modules/portfolioSlider';
 import portfolioPopup from './modules/portfolioPopup';
+import documentsHandler from './modules/documentsHandler';
 
 
 
@@ -26,4 +27,5 @@ toggleConsultPopup();
 faqAccordion();
 repairTypesSlider();
 portfolioSlider();
-portfolioPopup()
+portfolioPopup();
+documentsHandler()

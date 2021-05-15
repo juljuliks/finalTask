@@ -24,6 +24,8 @@ var _portfolioSlider = _interopRequireDefault(require("./modules/portfolioSlider
 
 var _portfolioPopup = _interopRequireDefault(require("./modules/portfolioPopup"));
 
+var _documentsHandler = _interopRequireDefault(require("./modules/documentsHandler"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 (0, _toggleMenu["default"])();
@@ -38,3 +40,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 (0, _repairTypesSlider["default"])();
 (0, _portfolioSlider["default"])();
 (0, _portfolioPopup["default"])();
+(0, _documentsHandler["default"])();
