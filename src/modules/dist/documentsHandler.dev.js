@@ -42,7 +42,6 @@ var documentsHandler = function documentsHandler() {
   var transparancyWrap = document.querySelector('.popupTransparencyWrap');
   var arrowLeftTablet = document.querySelector('#transparency-arrow_left');
   arrowLeftTablet.style.display = 'none';
-  console.log(transparancyWrap);
   var currentWidth = +getComputedStyle(document.querySelector('.transparency-item')).minWidth.replace(/\D/g, '');
 
   var transparencyBlockHandler = function transparencyBlockHandler(e) {

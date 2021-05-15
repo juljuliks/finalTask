@@ -75,7 +75,6 @@ const documentsHandler = () => {
   const arrowLeftTablet = document.querySelector('#transparency-arrow_left');
   arrowLeftTablet.style.display = 'none';
 
-  console.log(transparancyWrap);
   let currentWidth = +getComputedStyle(document.querySelector('.transparency-item')).minWidth.replace(/\D/g, '');
 
   const transparencyBlockHandler = (e) => {
