@@ -14,6 +14,7 @@ import portfolioSlider from './modules/portfolioSlider';
 import portfolioPopup from './modules/portfolioPopup';
 import documentsHandler from './modules/documentsHandler';
 import reviewsSlider from './modules/reviewsSlider';
+import showHintsSlider from './modules/showHintsSlider';
 
 toggleMenu();
 toggleNumber();
@@ -28,4 +29,5 @@ repairTypesSlider();
 portfolioSlider();
 portfolioPopup();
 documentsHandler();
-reviewsSlider()
+reviewsSlider();
+showHintsSlider();
