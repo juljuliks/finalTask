@@ -29,38 +29,42 @@ var portfolioPopup = function portfolioPopup() {
   total.innerText = popupPortfolioSlider.children.length;
 
   var portfolioPopupHandler = function portfolioPopupHandler(e) {
-    if (e.target.closest('.portfolio-slider__slide-frame')) {
-      arrowLeft.style.display = 'none';
-      popupPortfolio.style.visibility = 'visible';
-      portfolioText[currentSlide - 1].style.display = 'block';
-      popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
-    } else if (e.target.closest('#popup_portfolio_right')) {
-      arrowLeft.style.display = 'flex';
-      currentSlide++;
-      current.innerText = currentSlide;
-      cleaner();
-      portfolioText[currentSlide - 1].style.display = 'block';
-      currentPosition = currentPosition - 624;
-
-      if (currentSlide === 10) {
+    if (screen.width > 575) {
+      if (e.target.closest('.portfolio-slider__slide-frame')) {
         arrowLeft.style.display = 'none';
-        current.innerText = 1;
-        currentSlide = 1;
-        currentPosition = 0;
-      }
+        popupPortfolio.style.visibility = 'visible';
+        portfolioText[currentSlide - 1].style.display = 'block';
+        popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+      } else if (e.target.closest('#popup_portfolio_right')) {
+        arrowLeft.style.display = 'flex';
+        currentSlide++;
+        current.innerText = currentSlide;
+        cleaner();
+        portfolioText[currentSlide - 1].style.display = 'block';
+        currentPosition = currentPosition - 624;
 
-      popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
-    } else if (e.target.closest('#popup_portfolio_left')) {
-      currentSlide--;
-      current.innerText = currentSlide;
-      cleaner();
-      portfolioText[currentSlide + 1].style.display = 'block';
-      currentPosition = currentPosition + 624;
-      popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+        if (currentSlide === 10) {
+          arrowLeft.style.display = 'none';
+          current.innerText = 1;
+          currentSlide = 1;
+          currentPosition = 0;
+        }
 
-      if (currentSlide === 1) {
-        currentSlide = 1;
-        arrowLeft.style.display = 'none';
+        popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+      } else if (e.target.closest('#popup_portfolio_left')) {
+        currentSlide--;
+        current.innerText = currentSlide;
+        cleaner();
+        portfolioText[currentSlide + 1].style.display = 'block';
+        currentPosition = currentPosition + 624;
+        popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+
+        if (currentSlide === 1) {
+          currentSlide = 1;
+          arrowLeft.style.display = 'none';
+        }
+      } else if (!e.target.closest('.popup-dialog-portfolio') || e.target.closest('.close') && e.target.closest('.popup-portfolio')) {
+        popupPortfolio.style.visibility = 'hidden';
       }
     }
   };
