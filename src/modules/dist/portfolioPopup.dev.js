@@ -45,29 +45,32 @@ var portfolioPopup = function portfolioPopup() {
   var portfolioPopupHandler = function portfolioPopupHandler(e) {
     if (screen.width > 575) {
       if (e.target.closest('.portfolio-slider__slide-frame')) {
-        var target = e.target.getAttribute('id').replace(/\D/g, '');
+        var target = e.target.getAttribute('id').replace(/\D/g, '') - 1;
+        current.innerText = target + 1;
         arrowLeft.style.display = 'none';
         popupPortfolio.style.visibility = 'visible';
         var displayText = screen.width > 1024 ? portfolioText[currentSlide - 1].style.display = 'block' : '';
         popupPortfolioSlider.style.transform = "translateY(".concat(-624 * target, "px)");
+        currentSlide = +current.textContent;
+        currentPosition = -624 * target;
       } else if (e.target.closest('#popup_portfolio_right')) {
-        arrowLeft.style.display = 'flex';
-        currentSlide++;
-        current.innerText = currentSlide;
-        cleaner();
-
-        var _displayText = screen.width > 1024 ? portfolioText[currentSlide - 1].style.display = 'block' : '';
-
-        currentPosition = currentPosition - 624;
-
-        if (currentSlide === 10) {
+        if (current.textContent >= 10) {
           arrowLeft.style.display = 'none';
           current.innerText = 1;
           currentSlide = 1;
           currentPosition = 0;
-        }
+          popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+        } else {
+          currentSlide++;
+          arrowLeft.style.display = 'flex';
+          current.innerText++;
+          cleaner();
 
-        popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+          var _displayText = screen.width > 1024 ? portfolioText[currentSlide - 1].style.display = 'block' : '';
+
+          currentPosition = currentPosition - 624;
+          popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+        }
       } else if (e.target.closest('#popup_portfolio_left')) {
         currentSlide--;
         current.innerText = currentSlide;
