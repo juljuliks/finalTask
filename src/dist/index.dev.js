@@ -30,6 +30,8 @@ var _reviewsSlider = _interopRequireDefault(require("./modules/reviewsSlider"));
 
 var _showHintsSlider = _interopRequireDefault(require("./modules/showHintsSlider"));
 
+var _sendForm = _interopRequireDefault(require("./modules/sendForm"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 (0, _toggleMenu["default"])();
@@ -47,3 +49,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 (0, _documentsHandler["default"])();
 (0, _reviewsSlider["default"])();
 (0, _showHintsSlider["default"])();
+(0, _sendForm["default"])();

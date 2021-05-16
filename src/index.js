@@ -15,6 +15,7 @@ import portfolioPopup from './modules/portfolioPopup';
 import documentsHandler from './modules/documentsHandler';
 import reviewsSlider from './modules/reviewsSlider';
 import showHintsSlider from './modules/showHintsSlider';
+import sendForm from './modules/sendForm';
 
 toggleMenu();
 toggleNumber();
@@ -31,3 +32,4 @@ portfolioPopup();
 documentsHandler();
 reviewsSlider();
 showHintsSlider();
+sendForm();

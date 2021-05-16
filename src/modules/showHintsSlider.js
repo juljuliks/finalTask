@@ -65,7 +65,4 @@ const showHintsSlider = () => {
   formula.addEventListener('click', showHintsSliderHandler)
 }
 
-
-
-
 export default showHintsSlider;
