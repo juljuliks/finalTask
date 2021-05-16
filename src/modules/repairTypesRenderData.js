@@ -19,13 +19,13 @@ const repairTypesRenderData = () => {
 
 
   const start = () => {
-    // document.querySelectorAll('.popup-repair-types-content-table__list').forEach(el => el.innerHTML = '')
     document.querySelectorAll('.popup-repair-types-nav__item').forEach(el => {
       el.addEventListener('click', startRender)
     })
   }
 
   const startRender = (e) => {
+    document.querySelectorAll('.mobile-row').forEach(el => el.remove())
     let currentBlock = document.querySelector('.popup-repair-types-content-table').querySelector('tbody')
     currentBlock.innerHTML = '';
     for (const key in allData) {
@@ -33,7 +33,7 @@ const repairTypesRenderData = () => {
         allData[key]['type'] = 'Стены: Демонтажные работы'
       }
       if (e.target.textContent === allData[key]['type']) {
-        document.querySelector('#switch-inner').innerText = allData[key]['type']
+          document.querySelector('#switch-inner').innerText = allData[key]['type']
         createTable(allData[key]['name'], allData[key]['cost'], currentBlock)
       }
     }

@@ -25,13 +25,15 @@ var repairTypesRenderData = function repairTypesRenderData() {
   });
 
   var start = function start() {
-    // document.querySelectorAll('.popup-repair-types-content-table__list').forEach(el => el.innerHTML = '')
     document.querySelectorAll('.popup-repair-types-nav__item').forEach(function (el) {
       el.addEventListener('click', startRender);
     });
   };
 
   var startRender = function startRender(e) {
+    document.querySelectorAll('.mobile-row').forEach(function (el) {
+      return el.remove();
+    });
     var currentBlock = document.querySelector('.popup-repair-types-content-table').querySelector('tbody');
     currentBlock.innerHTML = '';
 
