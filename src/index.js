@@ -17,8 +17,6 @@ import reviewsSlider from './modules/reviewsSlider';
 import showHintsSlider from './modules/showHintsSlider';
 import sendForm from './modules/sendForm';
 import repairTypesRenderData from './modules/repairTypesRenderData';
-import auth from '../admin/auth';
-import admin from '../admin/admin';
 
 
 toggleMenu();
@@ -38,5 +36,3 @@ reviewsSlider();
 showHintsSlider();
 sendForm();
 repairTypesRenderData();
-// auth();
-// admin();

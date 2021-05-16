@@ -34,10 +34,6 @@ var _sendForm = _interopRequireDefault(require("./modules/sendForm"));
 
 var _repairTypesRenderData = _interopRequireDefault(require("./modules/repairTypesRenderData"));
 
-var _auth = _interopRequireDefault(require("../admin/auth"));
-
-var _admin = _interopRequireDefault(require("../admin/admin"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 (0, _toggleMenu["default"])();
@@ -56,5 +52,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 (0, _reviewsSlider["default"])();
 (0, _showHintsSlider["default"])();
 (0, _sendForm["default"])();
-(0, _repairTypesRenderData["default"])(); // auth();
-// admin();
+(0, _repairTypesRenderData["default"])();
