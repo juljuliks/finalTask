@@ -16,6 +16,8 @@ import documentsHandler from './modules/documentsHandler';
 import reviewsSlider from './modules/reviewsSlider';
 import showHintsSlider from './modules/showHintsSlider';
 import sendForm from './modules/sendForm';
+import repairTypesRenderData from './modules/repairTypesRenderData';
+
 
 toggleMenu();
 toggleNumber();
@@ -33,3 +35,4 @@ documentsHandler();
 reviewsSlider();
 showHintsSlider();
 sendForm();
+repairTypesRenderData();

@@ -32,6 +32,8 @@ var _showHintsSlider = _interopRequireDefault(require("./modules/showHintsSlider
 
 var _sendForm = _interopRequireDefault(require("./modules/sendForm"));
 
+var _repairTypesRenderData = _interopRequireDefault(require("./modules/repairTypesRenderData"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 (0, _toggleMenu["default"])();
@@ -50,3 +52,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 (0, _reviewsSlider["default"])();
 (0, _showHintsSlider["default"])();
 (0, _sendForm["default"])();
+(0, _repairTypesRenderData["default"])();
