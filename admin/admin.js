@@ -1,6 +1,12 @@
 const admin = () => {
   let allData = [];
   let selectList = document.querySelector('#typeItem');
+  const getCookie = (name) => {
+    let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ))
+    return matches ? decodeURIComponent(matches[1]) : undefined
+  }
 
   fetch('../../crm-backend/db.json', {
       method: 'GET'
@@ -12,7 +18,11 @@ const admin = () => {
       return response.json();
     })
     .then((data) => {
-      start(data)
+      if (getCookie('loginSuccess')) {
+        start(data)
+      } else {
+        document.location.replace('http://localhost/admin/')
+      }
     })
     .catch((error) => {
       console.error(error)
@@ -63,14 +73,11 @@ const admin = () => {
     for (const key in allData) {
       if (allData[key]['type'] === e.target.value) {
         createTable(allData[key]['id'], allData[key]['name'], allData[key]['cost'], allData[key]['type'], currentSelector)
-      } 
+      }
     }
     if (e.target.value === 'Все') {
       renderAll()
     }
-    // console.log(allData);
-    // console.log(e.target.value);
-    // console.log('efweqg');
   }
 
   const createTable = (id, name, price, type, selector, unitsM = 'm', unitsPow = '2') => {

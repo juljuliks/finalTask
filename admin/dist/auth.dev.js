@@ -1,5 +1,52 @@
 "use strict";
 
-var auth = function auth() {};
+var auth = function auth() {
+  var warningsMessages = document.querySelectorAll('.text-warning');
+  warningsMessages.forEach(function (el) {
+    return el.style.display = 'none';
+  });
+  var loginData = {};
+  fetch('./login.json', {
+    method: 'GET'
+  }).then(function (response) {
+    if (response.status !== 200) {
+      throw new Error('status network not 200');
+    }
 
-auth(); // export default auth;
+    return response.json();
+  }).then(function (data) {
+    start(data);
+  })["catch"](function (error) {
+    console.error(error);
+  });
+
+  var authentication = function authentication(e) {
+    e.preventDefault();
+    var login = document.getElementById('name');
+    var password = document.getElementById('type');
+
+    if (login.value === loginData.login || password.value === loginData.password) {
+      saveCookie();
+      login.value = '';
+      password.value = '';
+      document.location.replace('http://localhost/admin/table.html');
+    } else {
+      warningsMessages.forEach(function (el) {
+        return el.style.display = 'block';
+      });
+      login.value = '';
+      password.value = '';
+    }
+  };
+
+  var start = function start(data) {
+    loginData = data[0];
+    document.querySelector('form').addEventListener('submit', authentication);
+  };
+
+  var saveCookie = function saveCookie() {
+    document.cookie = 'loginSuccess=true';
+  };
+};
+
+auth();

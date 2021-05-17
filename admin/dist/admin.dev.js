@@ -3,6 +3,12 @@
 var admin = function admin() {
   var allData = [];
   var selectList = document.querySelector('#typeItem');
+
+  var getCookie = function getCookie(name) {
+    var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  };
+
   fetch('../../crm-backend/db.json', {
     method: 'GET'
   }).then(function (response) {
@@ -12,7 +18,11 @@ var admin = function admin() {
 
     return response.json();
   }).then(function (data) {
-    start(data);
+    if (getCookie('loginSuccess')) {
+      start(data);
+    } else {
+      document.location.replace('http://localhost/admin/');
+    }
   })["catch"](function (error) {
     console.error(error);
   });
@@ -75,10 +85,7 @@ var admin = function admin() {
 
     if (e.target.value === 'Все') {
       renderAll();
-    } // console.log(allData);
-    // console.log(e.target.value);
-    // console.log('efweqg');
-
+    }
   };
 
   var createTable = function createTable(id, name, price, type, selector) {
