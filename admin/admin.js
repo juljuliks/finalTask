@@ -137,8 +137,8 @@ const manageChanges = () => {
   const addItem = () => {
     let form = document.querySelector('form');
     let body = {
-      'type': form.querySelector('.input__type').value,
-      'name': form.querySelector('.input__name').value,
+      'type': form.querySelector('.input__name').value,
+      'name': form.querySelector('.input__type').value,
       'units': form.querySelector('.input__units').value,
       'cost': +form.querySelector('.input__cost').value
     };

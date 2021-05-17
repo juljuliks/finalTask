@@ -133,8 +133,8 @@ var manageChanges = function manageChanges() {
   var addItem = function addItem() {
     var form = document.querySelector('form');
     var body = {
-      'type': form.querySelector('.input__type').value,
-      'name': form.querySelector('.input__name').value,
+      'type': form.querySelector('.input__name').value,
+      'name': form.querySelector('.input__type').value,
       'units': form.querySelector('.input__units').value,
       'cost': +form.querySelector('.input__cost').value
     };
