@@ -1,5 +1,14 @@
 const admin = () => {
-  let allData = [];
+  let allData = []
+
+  const setStorage = () => {
+    let storageData = []
+    for (const key in allData) {
+      storageData.push(allData[key]);
+    }
+    localStorage.setItem('allData', JSON.stringify(storageData))
+  }
+
   let selectList = document.querySelector('#typeItem');
   const getCookie = (name) => {
     let matches = document.cookie.match(new RegExp(
@@ -19,8 +28,9 @@ const admin = () => {
     .then((data) => {
       if (getCookie('loginSuccess')) {
         start(data)
+        setStorage()
       } else {
-        document.location.replace('http://localhost/admin/')
+        document.location.replace('/admin/')
       }
     })
     .catch((error) => {
@@ -105,32 +115,127 @@ admin();
 
 const manageChanges = () => {
   const addItemBtn = document.querySelector('.btn-addItem')
-  const modalAddItem = document.querySelector('#modal')
+  const modal = document.querySelector('#modal')
 
-
-  // document.querySelectorAll
-
-  const showModal = (e) => {
-    e.preventDefault()
-    if (e.target.closest('.btn-addItem')) {
-      modalAddItem.querySelector('.modal__header').innerText = 'Добавление новой услуги'
-      modalAddItem.querySelectorAll('input').forEach(el => el.value = '')
-      modalAddItem.style.display = 'flex'
-    } else if (e.target.closest('.button__close')) {
-      modalAddItem.style.display = 'none'
-    } else if (e.target.closest('.action-change')) {
-      let currentCell = e.target.closest('tr');
-      modalAddItem.querySelector('.input__type').value = currentCell.querySelector('.table-type').textContent
-      modalAddItem.querySelector('.input__name').value = currentCell.querySelector('.table-name').textContent
-      modalAddItem.querySelector('.input__units').value = currentCell.querySelector('.table-units').textContent
-      modalAddItem.querySelector('.input__cost').value = currentCell.querySelector('.table-cost').textContent
-
-      modalAddItem.style.display = 'flex';
-      modalAddItem.querySelector('.modal__header').innerText = 'Редактировать услугу'
-    }
+  const deleteItem = (id) => {
+    fetch(`http://localhost:3000/api/items/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('status network not 200')
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
-  window.addEventListener('click', showModal)
+  const addItem = () => {
+    let form = document.querySelector('form');
+    let body = {
+      'type': form.querySelector('.input__type').value,
+      'name': form.querySelector('.input__name').value,
+      'units': form.querySelector('.input__units').value,
+      'cost': +form.querySelector('.input__cost').value
+    };
+    fetch('http://localhost:3000/api/items', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('status network not 200')
+        }
+        console.log(body);
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
+  const getChangingItem = (id) => {
+    fetch(`http://localhost:3000/api/items/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('status network not 200')
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
+  const changeItem = (id) => {
+    let form = document.querySelector('form');
+    let body = {
+      'type': form.querySelector('.input__name').value,
+      'name': form.querySelector('.input__type').value,
+      'units': form.querySelector('.input__units').value,
+      'cost': +form.querySelector('.input__cost').value
+    };
+    fetch(`http://localhost:3000/api/items/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('status network not 200')
+        }
+        console.log(body);
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
+  const changesHandler = (e) => {
+    e.preventDefault()
+    if (e.target.closest('.btn-addItem')) {
+      modal.querySelector('.modal__header').innerText = 'Добавление новой услуги'
+      modal.querySelectorAll('input').forEach(el => el.value = '')
+      modal.style.display = 'flex';
+      document.querySelector('.button-ui_firm').setAttribute('id', 'addItem');
+    } else if (e.target.closest('.button__close')) {
+      modal.style.display = 'none'
+    } else if (e.target.closest('.action-change')) {
+      let currentCell = e.target.closest('tr');
+      modal.querySelector('.input__type').value = currentCell.querySelector('.table-type').textContent
+      modal.querySelector('.input__name').value = currentCell.querySelector('.table-name').textContent
+      modal.querySelector('.input__units').value = currentCell.querySelector('.table-units').textContent
+      modal.querySelector('.input__cost').value = currentCell.querySelector('.table-cost').textContent
+      modal.style.display = 'flex';
+      modal.querySelector('.modal__header').innerText = 'Редактировать услугу'
+      let id = e.target.closest('tr').querySelector('.table__cell').textContent;
+      getChangingItem(id)
+      document.querySelector('.button-ui_firm').setAttribute('id', 'change');
+      document.querySelector('#change').removeAttribute('data-id');
+      document.querySelector('.button-ui_firm').dataset.id = `${id}`
+    } else if (e.target.closest('#addItem')) {
+      addItem()
+    } else if (e.target.closest('.action-remove')) {
+      let id = e.target.closest('tr').querySelector('.table__cell').textContent;
+      deleteItem(id)
+    } else if (e.target.closest('#change')) {
+      let id = document.querySelector('#change').getAttribute('data-id')
+      changeItem(id)
+    }
+  }
+  window.addEventListener('click', changesHandler)
 }
 
 manageChanges()

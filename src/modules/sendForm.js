@@ -61,12 +61,6 @@ const sendForm = () => {
         })
         .catch((error) => {
           console.error(error)
-          //   document.querySelector('.circle').remove();
-          //   statusMessage.textContent = errorMessage;
-          //   setTimeout(() => {
-          //     statusMessage.innerHTML = '';
-          //     document.querySelector('.popup').style.display = 'none';
-          //   }, 2000)
         })
     });
   }

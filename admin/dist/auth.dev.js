@@ -22,7 +22,7 @@ var auth = function auth() {
     return response.json();
   }).then(function (data) {
     if (getCookie('loginSuccess')) {
-      document.location.replace('http://localhost/admin/table.html');
+      document.location.replace('/admin/table.html');
     }
 
     start(data);
@@ -39,7 +39,7 @@ var auth = function auth() {
       saveCookie();
       login.value = '';
       password.value = '';
-      document.location.replace('http://localhost/admin/table.html');
+      document.location.replace('/admin/table.html');
     } else {
       warningsMessages.forEach(function (el) {
         return el.style.display = 'block';

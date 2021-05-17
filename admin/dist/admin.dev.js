@@ -2,6 +2,17 @@
 
 var admin = function admin() {
   var allData = [];
+
+  var setStorage = function setStorage() {
+    var storageData = [];
+
+    for (var key in allData) {
+      storageData.push(allData[key]);
+    }
+
+    localStorage.setItem('allData', JSON.stringify(storageData));
+  };
+
   var selectList = document.querySelector('#typeItem');
 
   var getCookie = function getCookie(name) {
@@ -20,8 +31,9 @@ var admin = function admin() {
   }).then(function (data) {
     if (getCookie('loginSuccess')) {
       start(data);
+      setStorage();
     } else {
-      document.location.replace('http://localhost/admin/');
+      document.location.replace('/admin/');
     }
   })["catch"](function (error) {
     console.error(error);
@@ -101,31 +113,126 @@ admin();
 
 var manageChanges = function manageChanges() {
   var addItemBtn = document.querySelector('.btn-addItem');
-  var modalAddItem = document.querySelector('#modal'); // document.querySelectorAll
+  var modal = document.querySelector('#modal');
 
-  var showModal = function showModal(e) {
+  var deleteItem = function deleteItem(id) {
+    fetch("http://localhost:3000/api/items/".concat(id), {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      if (response.status !== 200) {
+        throw new Error('status network not 200');
+      }
+    })["catch"](function (error) {
+      console.error(error);
+    });
+  };
+
+  var addItem = function addItem() {
+    var form = document.querySelector('form');
+    var body = {
+      'type': form.querySelector('.input__type').value,
+      'name': form.querySelector('.input__name').value,
+      'units': form.querySelector('.input__units').value,
+      'cost': +form.querySelector('.input__cost').value
+    };
+    fetch('http://localhost:3000/api/items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then(function (response) {
+      if (response.status !== 200) {
+        throw new Error('status network not 200');
+      }
+
+      console.log(body);
+    })["catch"](function (error) {
+      console.error(error);
+    });
+  };
+
+  var getChangingItem = function getChangingItem(id) {
+    fetch("http://localhost:3000/api/items/".concat(id), {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      if (response.status !== 200) {
+        throw new Error('status network not 200');
+      }
+    })["catch"](function (error) {
+      console.error(error);
+    });
+  };
+
+  var changeItem = function changeItem(id) {
+    var form = document.querySelector('form');
+    var body = {
+      'type': form.querySelector('.input__name').value,
+      'name': form.querySelector('.input__type').value,
+      'units': form.querySelector('.input__units').value,
+      'cost': +form.querySelector('.input__cost').value
+    };
+    fetch("http://localhost:3000/api/items/".concat(id), {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }).then(function (response) {
+      if (response.status !== 200) {
+        throw new Error('status network not 200');
+      }
+
+      console.log(body);
+    })["catch"](function (error) {
+      console.error(error);
+    });
+  };
+
+  var changesHandler = function changesHandler(e) {
     e.preventDefault();
 
     if (e.target.closest('.btn-addItem')) {
-      modalAddItem.querySelector('.modal__header').innerText = 'Добавление новой услуги';
-      modalAddItem.querySelectorAll('input').forEach(function (el) {
+      modal.querySelector('.modal__header').innerText = 'Добавление новой услуги';
+      modal.querySelectorAll('input').forEach(function (el) {
         return el.value = '';
       });
-      modalAddItem.style.display = 'flex';
+      modal.style.display = 'flex';
+      document.querySelector('.button-ui_firm').setAttribute('id', 'addItem');
     } else if (e.target.closest('.button__close')) {
-      modalAddItem.style.display = 'none';
+      modal.style.display = 'none';
     } else if (e.target.closest('.action-change')) {
       var currentCell = e.target.closest('tr');
-      modalAddItem.querySelector('.input__type').value = currentCell.querySelector('.table-type').textContent;
-      modalAddItem.querySelector('.input__name').value = currentCell.querySelector('.table-name').textContent;
-      modalAddItem.querySelector('.input__units').value = currentCell.querySelector('.table-units').textContent;
-      modalAddItem.querySelector('.input__cost').value = currentCell.querySelector('.table-cost').textContent;
-      modalAddItem.style.display = 'flex';
-      modalAddItem.querySelector('.modal__header').innerText = 'Редактировать услугу';
+      modal.querySelector('.input__type').value = currentCell.querySelector('.table-type').textContent;
+      modal.querySelector('.input__name').value = currentCell.querySelector('.table-name').textContent;
+      modal.querySelector('.input__units').value = currentCell.querySelector('.table-units').textContent;
+      modal.querySelector('.input__cost').value = currentCell.querySelector('.table-cost').textContent;
+      modal.style.display = 'flex';
+      modal.querySelector('.modal__header').innerText = 'Редактировать услугу';
+      var id = e.target.closest('tr').querySelector('.table__cell').textContent;
+      getChangingItem(id);
+      document.querySelector('.button-ui_firm').setAttribute('id', 'change');
+      document.querySelector('#change').removeAttribute('data-id');
+      document.querySelector('.button-ui_firm').dataset.id = "".concat(id);
+    } else if (e.target.closest('#addItem')) {
+      addItem();
+    } else if (e.target.closest('.action-remove')) {
+      var _id = e.target.closest('tr').querySelector('.table__cell').textContent;
+      deleteItem(_id);
+    } else if (e.target.closest('#change')) {
+      var _id2 = document.querySelector('#change').getAttribute('data-id');
+
+      changeItem(_id2);
     }
   };
 
-  window.addEventListener('click', showModal);
+  window.addEventListener('click', changesHandler);
 };
 
 manageChanges();
