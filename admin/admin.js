@@ -7,7 +7,6 @@ const admin = () => {
     ))
     return matches ? decodeURIComponent(matches[1]) : undefined
   }
-
   fetch('../../crm-backend/db.json', {
       method: 'GET'
     })
@@ -104,4 +103,34 @@ const admin = () => {
 
 admin();
 
-// export default admin;
+const manageChanges = () => {
+  const addItemBtn = document.querySelector('.btn-addItem')
+  const modalAddItem = document.querySelector('#modal')
+
+
+  // document.querySelectorAll
+
+  const showModal = (e) => {
+    e.preventDefault()
+    if (e.target.closest('.btn-addItem')) {
+      modalAddItem.querySelector('.modal__header').innerText = 'Добавление новой услуги'
+      modalAddItem.querySelectorAll('input').forEach(el => el.value = '')
+      modalAddItem.style.display = 'flex'
+    } else if (e.target.closest('.button__close')) {
+      modalAddItem.style.display = 'none'
+    } else if (e.target.closest('.action-change')) {
+      let currentCell = e.target.closest('tr');
+      modalAddItem.querySelector('.input__type').value = currentCell.querySelector('.table-type').textContent
+      modalAddItem.querySelector('.input__name').value = currentCell.querySelector('.table-name').textContent
+      modalAddItem.querySelector('.input__units').value = currentCell.querySelector('.table-units').textContent
+      modalAddItem.querySelector('.input__cost').value = currentCell.querySelector('.table-cost').textContent
+
+      modalAddItem.style.display = 'flex';
+      modalAddItem.querySelector('.modal__header').innerText = 'Редактировать услугу'
+    }
+  }
+
+  window.addEventListener('click', showModal)
+}
+
+manageChanges()

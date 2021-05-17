@@ -2,6 +2,12 @@ const auth = () => {
   const warningsMessages = document.querySelectorAll('.text-warning');
   warningsMessages.forEach(el => el.style.display = 'none')
   let loginData = {};
+  const getCookie = (name) => {
+    let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ))
+    return matches ? decodeURIComponent(matches[1]) : undefined
+  }
   fetch('./login.json', {
       method: 'GET'
     })
@@ -12,6 +18,9 @@ const auth = () => {
       return response.json();
     })
     .then((data) => {
+      if (getCookie('loginSuccess')) {
+        document.location.replace('http://localhost/admin/table.html')
+      }
       start(data)
     })
     .catch((error) => {

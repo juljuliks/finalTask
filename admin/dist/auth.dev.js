@@ -6,6 +6,12 @@ var auth = function auth() {
     return el.style.display = 'none';
   });
   var loginData = {};
+
+  var getCookie = function getCookie(name) {
+    var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+  };
+
   fetch('./login.json', {
     method: 'GET'
   }).then(function (response) {
@@ -15,6 +21,10 @@ var auth = function auth() {
 
     return response.json();
   }).then(function (data) {
+    if (getCookie('loginSuccess')) {
+      document.location.replace('http://localhost/admin/table.html');
+    }
+
     start(data);
   })["catch"](function (error) {
     console.error(error);
