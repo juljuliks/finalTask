@@ -188,8 +188,6 @@ var manageChanges = function manageChanges() {
       if (response.status !== 200) {
         throw new Error('status network not 200');
       }
-
-      console.log(body);
     })["catch"](function (error) {
       console.error(error);
     });
