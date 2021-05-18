@@ -1153,10 +1153,9 @@ template, [hidden] {
     font-size: 18px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 575px) {
     .formula-slider-wrap {
-        width: 500px;
-        padding: 15%;
+        width: 290px;
         margin-left: auto;
         margin-right: auto;
     }

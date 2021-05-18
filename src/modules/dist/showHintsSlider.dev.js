@@ -9,7 +9,7 @@ var showHintsSlider = function showHintsSlider() {
   var formula = document.querySelector('.formula');
   var arrowLeft = document.querySelector('#formula-arrow_left');
   var style = document.createElement('style');
-  style.innerHTML = "\n    .formulaSliderWrap{\n    overflow:hidden  !important;\n    }        \n    .formulaSlider{\n    align-items: flex-start !important;\n    display:flex !important;\n    transition:transform 0.5s !important;\n    will-cahnge: transform !important;\n    }\n    .formulaSlider-slide{\n    display: flex !important;\n    align-items:center;\n    justify-content: center;\n    min-width:290px !important;\n    }";
+  style.innerHTML = "\n    .formulaSliderWrap{\n    overflow:hidden  !important;\n    }        \n    .formulaSlider{\n    align-items: flex-start !important;\n    display:flex !important;\n    transition:transform 0.5s !important;\n    will-cahnge: transform !important;\n    }\n    .formulaSlider-slide{\n    display: flex !important;\n    align-items:center;\n    justify-content: center;\n    min-width:290px !important;\n    }\n    @media (max-width: 1024px) {\n      .formula-slider-wrap {\n          width: 500px;\n          padding: 15%;\n          margin-left: auto;\n          margin-right: auto;\n      }\n  }";
   document.head.appendChild(style);
   document.querySelector('.formula-slider-wrap').classList.add('formulaSliderWrap');
   document.querySelector('.formula-slider').classList.add('formulaSlider');

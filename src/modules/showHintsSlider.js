@@ -17,7 +17,15 @@ const showHintsSlider = () => {
     align-items:center;
     justify-content: center;
     min-width:290px !important;
-    }`
+    }
+    @media (max-width: 1024px) {
+      .formula-slider-wrap {
+          width: 500px;
+          padding: 15%;
+          margin-left: auto;
+          margin-right: auto;
+      }
+  }`
 
   document.head.appendChild(style);
 
