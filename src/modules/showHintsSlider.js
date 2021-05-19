@@ -1,6 +1,7 @@
 const showHintsSlider = () => {
   const formula = document.querySelector('.formula');
   const arrowLeft = document.querySelector('#formula-arrow_left');
+  const arrowRight = document.querySelector('#formula-arrow_right');
   const style = document.createElement('style');
   style.innerHTML = `
     .formulaSliderWrap{
@@ -43,31 +44,25 @@ const showHintsSlider = () => {
   arrowLeft.style.display = 'none'
   const showHintsSliderHandler = (e) => {
     if (e.target.closest('#formula-arrow_right')) {
-      if (currentItem > 4) {
-        arrowLeft.style.display = 'none'
-        cleaner()
-        currentItem = 0
-        items[currentItem].classList.add('active-item')
-        currentPosition = 0
-        slider.style.transform = `translateX(${currentPosition}px)`
-      } else {
-        arrowLeft.style.display = 'flex'
-        currentPosition = currentPosition - 290;
-        currentItem++
-        cleaner()
-        items[currentItem].classList.add('active-item')
-        slider.style.transform = `translateX(${currentPosition}px)`
+      arrowLeft.style.display = 'flex'
+      currentPosition = currentPosition - 290;
+      currentItem++
+      cleaner()
+      items[currentItem].classList.add('active-item')
+      slider.style.transform = `translateX(${currentPosition}px)`
+      console.log(currentItem);
+      if (currentItem == 5) {
+        arrowRight.style.display = 'none'
       }
     } else if (e.target.closest('#formula-arrow_left')) {
+      currentPosition = currentPosition + 290;
+      currentItem--
+      cleaner()
+      items[currentItem].classList.add('active-item')
+      slider.style.transform = `translateX(${currentPosition}px)`
       if (currentItem < 1) {
         arrowLeft.style.display = 'none'
-      } else {
-        currentItem--
-        cleaner()
-        items[currentItem].classList.add('active-item')
-        currentPosition = currentPosition + 290;
-        slider.style.transform = `translateX(${currentPosition}px)`
-      }
+      } 
     }
   }
   formula.addEventListener('click', showHintsSliderHandler)
