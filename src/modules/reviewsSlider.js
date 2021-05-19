@@ -40,9 +40,7 @@ const reviewsSlider = () => {
       currentPosition = currentPosition + width;
       reviewWrapper.style.transform = `translateX(${currentPosition}px)`
     }
-
   }
-
   reviewsBlock.addEventListener('click', rewiewsBlockHandler)
 }
 
