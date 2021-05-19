@@ -1,5 +1,0 @@
-portfolioText.forEach(el => el.style.cssText = 'display: flex; flex-direction: row; justify-content: space-between; position: absolute; bottom: -79px; background-color: rgb(255, 255, 255); padding-left: 20px')
-
-  slides.forEach(el => {
-    el.style.cssText = 'min-height: 624px; position: absolute; margin-top: 231px;'
-  })

@@ -47,6 +47,7 @@ const portfolioSlider = () => {
   })
   const portfolioWrap = document.querySelectorAll('.portfolio-wrap')[1];
   const portfolioWrapMobiile = document.querySelectorAll('.portfolio-wrap')[0];
+  
   const portfolioSliderHandler = (e) => {
     if (e.target.closest('#portfolio-arrow_right')) {
       count++

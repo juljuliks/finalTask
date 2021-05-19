@@ -100,25 +100,20 @@ var portfolioPopup = function portfolioPopup() {
           portfolioText[currentSlide - 1].style.display = 'flex';
         }
 
-        if (current.textContent >= 10) {
-          // arrowLeft.style.display = 'none'
-          current.innerText = 1;
-          currentSlide = 1;
-          currentPosition = 0;
-          popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
-        } else {
-          currentSlide++;
-          arrowLeft.style.display = 'flex';
-          current.innerText++;
-          currentPosition = currentPosition - step;
-          popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+        currentSlide++;
+        arrowLeft.style.display = 'flex';
+        current.innerText++;
+        currentPosition = currentPosition - step;
+        popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
+
+        if (currentSlide == 10) {
+          arrowRight.style.display = 'none';
         }
       } else {
         currentSlide++;
         arrowLeft.style.display = 'flex';
 
         if (currentSlide >= 10) {
-          // HERE
           arrowRight.style.display = 'none';
         }
 
@@ -130,10 +125,6 @@ var portfolioPopup = function portfolioPopup() {
         portfolioText[currentSlide - 1].style.cssText = 'display: flex; margin-top: 300px';
       }
     } else if (e.target.closest('#popup_portfolio_left')) {
-      slides.forEach(function (el) {
-        return el.style.display = 'none';
-      });
-
       if (screen.width >= 768) {
         cleaner();
         currentSlide--;
@@ -151,22 +142,23 @@ var portfolioPopup = function portfolioPopup() {
         currentPosition = currentPosition + step;
         popupPortfolioSlider.style.transform = "translateY(".concat(currentPosition, "px)");
 
-        if (currentSlide === 1) {
-          currentSlide = 1;
+        if (currentSlide == 1) {
           arrowLeft.style.display = 'none';
         }
       } else {
         currentSlide--;
-        arrowRight.style.display = 'block';
+        arrowRight.style.display = 'flex';
+
+        if (currentSlide == 1) {
+          arrowLeft.style.display = 'none';
+        }
+
         current.innerText--;
         slides.forEach(function (el) {
           return el.style.display = 'none';
         });
-        slides[currentSlide].style.display = 'block';
-        portfolioText.forEach(function (el) {
-          return el.style.display = 'none';
-        });
-        portfolioText[currentSlide].style.cssText = 'display: flex; margin-top: 300px';
+        slides[currentSlide - 1].style.display = 'block';
+        portfolioText[currentSlide - 1].style.cssText = 'display: flex; margin-top: 300px';
       }
     } else if (!e.target.closest('.popup-dialog-portfolio') || e.target.closest('.close') && e.target.closest('.popup-portfolio')) {
       popupPortfolio.style.visibility = 'hidden';
