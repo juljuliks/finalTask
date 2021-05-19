@@ -20,6 +20,7 @@ const reviewsSlider = () => {
 
   const reviewWrapper = document.querySelector('.reviewWrap');
   const arrowLeft = document.querySelector('#reviews-arrow_left');
+  const arrowRight = document.querySelector('#reviews-arrow_right');
   arrowLeft.style.display = 'none';
 
   let currentPosition = 0;
@@ -27,12 +28,12 @@ const reviewsSlider = () => {
     if (e.target.closest('#reviews-arrow_right')) {
       currentPosition = currentPosition - width;
       arrowLeft.style.display = 'flex';
-      if (currentPosition < -(width * 4)) {
-        currentPosition = 0;
-        arrowLeft.style.display = 'none';
+      if (currentPosition < -(width * 3)) {
+        arrowRight.style.display = 'none';
       }
       reviewWrapper.style.transform = `translateX(${currentPosition}px)`
     } else if (e.target.closest('#reviews-arrow_left')) {
+      arrowRight.style.display = 'flex';
       if (currentPosition === -width) {
         arrowLeft.style.display = 'none';
       }
