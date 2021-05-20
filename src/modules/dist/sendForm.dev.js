@@ -77,6 +77,11 @@ var sendForm = function sendForm() {
   createRequest(form3);
   createRequest(form4);
   createRequest(form6);
+  popupThank.addEventListener('click', function (e) {
+    if (!e.target.closest('.popup-thank-bg') || e.target.closest('.close-thank')) {
+      popupThank.style.visibility = 'hidden';
+    }
+  });
 };
 
 var _default = sendForm;

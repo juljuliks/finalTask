@@ -64,13 +64,16 @@ const sendForm = () => {
         })
     });
   }
-
   createRequest(form1);
   createRequest(form2);
   createRequest(form3);
   createRequest(form4);
   createRequest(form6);
+
+  popupThank.addEventListener('click', (e) => {
+    if (!e.target.closest('.popup-thank-bg') || e.target.closest('.close-thank')) {
+      popupThank.style.visibility = 'hidden';
+    }
+  })
 }
-
-
 export default sendForm;
