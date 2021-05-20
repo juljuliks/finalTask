@@ -39,7 +39,6 @@ var showHintsSlider = function showHintsSlider() {
       cleaner();
       items[currentItem].classList.add('active-item');
       slider.style.transform = "translateX(".concat(currentPosition, "px)");
-      console.log(currentItem);
 
       if (currentItem == 5) {
         arrowRight.style.display = 'none';

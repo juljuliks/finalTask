@@ -47,6 +47,7 @@ const sendForm = () => {
           }
           popupThank.style.visibility = 'visible';
           setTimeout(() => {
+            document.querySelector('.popup-consultation').style.visibility = 'hidden';
             popupThank.style.visibility = 'hidden';
           }, 2000)
           formInputs.forEach(input => {
