@@ -3,15 +3,16 @@ const repairTypesSlider = () => {
     slider = document.querySelector('.repair-types-slider'),
     navItem = document.querySelectorAll('.repair-types-nav__item'),
     sliderItems = Array.from(slider.children),
-    listRepair = document.querySelector('.nav-list-repair');
+    listRepair = document.querySelector('.nav-list-repair'),
+    imgHeight = document.querySelector('.repair-types-slider__slide').children[0].offsetHeight;
 
   listRepair.style.transform = `translateX(0px)`
 
-  // console.log(document.querySelector('.repair-types-slider__slide').children[0].offsetHeight);
-  let currentPosition = 0;
-  let mobileTabsPosition = 0;
-  const imgHeight = document.querySelector('.repair-types-slider__slide').children[0].offsetHeight;
-  let count = 1;
+  let currentPosition = 0,
+    mobileTabsPosition = 0,
+    count = 1,
+    displayCount;
+
   const style = document.createElement('style');
   style.innerHTML = `
         .activeType: {
@@ -28,7 +29,6 @@ const repairTypesSlider = () => {
       }
     })
   }
-
   const hideItems = () => {
     sliderItems.forEach(el => {
       el.style.transform = 'translateY(0px)'
@@ -38,7 +38,6 @@ const repairTypesSlider = () => {
       }
     })
   }
-
   const repairSliderHandler = (e) => {
     let total = document.querySelector('.slider-counter-content__total');
     if (e.target.closest('.repair-types-nav__item')) {
@@ -50,7 +49,6 @@ const repairTypesSlider = () => {
       currentPosition = 0;
       count = 1;
       document.querySelector('.slider-counter-content__current').innerText = '1'
-
       total.textContent = currentElem.children.length
       currentElem.classList.add('activeType')
       if (e.target.classList.contains('active')) {
@@ -61,18 +59,18 @@ const repairTypesSlider = () => {
       }
     } else if (e.target.closest('#repair-types-arrow_right')) {
       count = document.querySelector('.slider-counter-content__current');
-      let displayCount = (count.innerText == +total.textContent) ? count.innerText = 1 : count.innerText++
+      displayCount = (count.innerText == +total.textContent) ? count.innerText = 1 : count.innerText++
       const elem = document.querySelector('.activeType');
       elem.style.display = 'block'
       currentPosition = currentPosition - imgHeight;
-      if (currentPosition <= -elem.children.length * imgHeight || currentPosition < -((+total.textContent - 1) *  imgHeight)) {
+      if (currentPosition <= -elem.children.length * imgHeight || currentPosition < -((+total.textContent - 1) * imgHeight)) {
         currentPosition = 0
       }
       elem.style.transform = `translateY(${currentPosition}px)`
     } else if (e.target.closest('#repair-types-arrow_left')) {
       count = document.querySelector('.slider-counter-content__current');
       let totalCount = +total.textContent
-      let displayCount = (count.innerText < totalCount) ? (count.innerText == 1) ? count.innerText = totalCount : (count.innerText > 1) ? count.innerText-- : count.innerText = 1 : count.innerText--
+      displayCount = (count.innerText < totalCount) ? (count.innerText == 1) ? count.innerText = totalCount : (count.innerText > 1) ? count.innerText-- : count.innerText = 1 : count.innerText--
       const elem = document.querySelector('.activeType');
       elem.style.display = 'block'
       currentPosition = currentPosition + imgHeight;

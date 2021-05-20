@@ -1,6 +1,19 @@
 const portfolioPopup = () => {
   const popupPortfolio = document.querySelector('.popup-portfolio'),
-    popupPortfolioSliderWrap = document.querySelector('.popup-portfolio-slider-wrap');
+        popupPortfolioSliderWrap = document.querySelector('.popup-portfolio-slider-wrap'),
+        popupPortfolioSlider = document.querySelector('.popup-portfolio-slider'),
+        portfolioText = document.querySelectorAll('.popup-portfolio-text'),
+        arrowLeft = document.querySelector('#popup_portfolio_left'),
+        arrowRight = document.querySelector('#popup_portfolio_right'),
+        slides = document.querySelectorAll('.popup-portfolio-slider__slide'),
+        current = document.querySelector('#popup-portfolio-counter').querySelector('.slider-counter-content__current'),
+        total = document.querySelector('#popup-portfolio-counter').querySelector('.slider-counter-content__total');
+
+        let currentPosition = 0,
+        currentSlide = 1,
+        step = (screen.width <= 1024) ? 857 : 624;
+        total.innerText = popupPortfolioSlider.children.length;
+        portfolioText.forEach(el => el.style.display = 'none');
 
   popupPortfolioSliderWrap.style.position = 'absolute'
 
@@ -22,12 +35,6 @@ const portfolioPopup = () => {
     `
   document.head.appendChild(style);
 
-  const popupPortfolioSlider = document.querySelector('.popup-portfolio-slider');
-  const portfolioText = document.querySelectorAll('.popup-portfolio-text');
-  const arrowLeft = document.querySelector('#popup_portfolio_left');
-  const arrowRight = document.querySelector('#popup_portfolio_right');
-  const slides = document.querySelectorAll('.popup-portfolio-slider__slide');
-
   const idSetter = (selector) => {
     let id = 0;
     selector.forEach(el => {
@@ -43,13 +50,6 @@ const portfolioPopup = () => {
     document.querySelectorAll('.popup-portfolio-text').forEach(el => el.style.display = 'none')
   }
 
-  let currentPosition = 0,
-    currentSlide = 1;
-  const current = document.querySelector('#popup-portfolio-counter').querySelector('.slider-counter-content__current'),
-    total = document.querySelector('#popup-portfolio-counter').querySelector('.slider-counter-content__total');
-  total.innerText = popupPortfolioSlider.children.length;
-
-  portfolioText.forEach(el => el.style.display = 'none')
   if (screen.width <= 1024 && screen.width >= 768) {
     slides.forEach(el => {
       el.style.cssText = 'margin-top: 292px'
@@ -60,14 +60,13 @@ const portfolioPopup = () => {
     slides.forEach(el => el.style.display = 'none')
   }
 
-  let step = (screen.width <= 1024) ? 857 : 624;
-
   const portfolioPopupHandler = (e) => {
     if (e.target.closest('.portfolio-slider__slide-frame')) {
       let target = e.target.getAttribute('id').replace(/\D/g, '') - 1;
       current.innerText = target + 1;
       arrowLeft.style.display = 'none'
       popupPortfolio.style.visibility = 'visible';
+      cleaner();
       if (screen.width > 1024) {
         portfolioText[currentSlide - 1].style.display = 'block'
       } else if (screen.width <= 1024 && screen.width >= 768) {
@@ -141,10 +140,7 @@ const portfolioPopup = () => {
       popupPortfolio.style.visibility = 'hidden';
     }
   }
-
-
   window.addEventListener('click', portfolioPopupHandler)
-
 }
 
 

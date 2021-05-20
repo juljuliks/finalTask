@@ -9,7 +9,6 @@ const sendForm = () => {
     form4 = document.getElementById('feedback4'),
     form6 = document.getElementById('feedback6');
 
-
   const createRequest = (form) => {
     let checkbox;
     document.querySelectorAll('input[type=checkbox]').forEach(el => {

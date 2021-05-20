@@ -1,21 +1,24 @@
 const documentsHandler = () => {
-  const transparencyBlock = document.querySelector('.transparency'),
-    transparancyPopup = document.querySelector('.popup-transparency'),
+  const transparancyPopup = document.querySelector('.popup-transparency'),
     popupTransparencySlider = document.querySelector('.popup-transparency-slider'),
-    trasparensyItems = document.querySelectorAll('.transparency-item');
-
-  const total = document.querySelector('#transparency-popup-counter').querySelector('.slider-counter-content__total');
-  const current = document.querySelector('#transparency-popup-counter').querySelector('.slider-counter-content__current');
-  const arrowRight = document.querySelector('#transparency_right')
-  const arrowLeft = document.querySelector('#transparency_left')
+    trasparensyItems = document.querySelectorAll('.transparency-item'),
+    total = document.querySelector('#transparency-popup-counter').querySelector('.slider-counter-content__total'),
+    current = document.querySelector('#transparency-popup-counter').querySelector('.slider-counter-content__current'),
+    arrowRight = document.querySelector('#transparency_right'),
+    arrowLeft = document.querySelector('#transparency_left');
 
   let count = 1;
   current.innerText = count;
   let currentPosition = 0;
   total.innerText = trasparensyItems.length
 
-  let styleWidth =  document.querySelector('.popup-transparency-slider__slide').offsetWidth;
+  let styleWidth = document.querySelector('.popup-transparency-slider__slide').offsetWidth;
   const style = document.createElement('style');
+
+  let width;
+  if (screen.width <= 1024 && screen.width >= 768) width = 744;
+  else if (screen.width < 768) width = 290;
+
   style.innerHTML = `
     .popupTransparencyWrap {
         position: relative;
@@ -27,52 +30,28 @@ const documentsHandler = () => {
     .popupTransparencyWrap .popup-transparency-slider__slide{
         min-width: ${styleWidth}px;
     }
+    .transparency-slider{
+      display: -webkit-box !important;
+      display: -ms-flexbox !important;
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      transition:transform 0.5s !important;
+  }
+  .transparency-slider .transparency-item{
+      min-width: ${width}px !important;
+  }
+  .transparency-slider-wrap{
+      overflow: hidden !important;
+  }
 `
   document.head.appendChild(style)
-
-  if (screen.width <= 1024) {
-    const transparencyStyle = document.createElement('style');
-    transparencyStyle.innerHTML = `
-      .transparency-slider{
-          display: -webkit-box !important;
-          display: -ms-flexbox !important;
-          display: flex !important;
-          flex-wrap: nowrap !important;
-          transition:transform 0.5s !important;
-      }
-      .transparency-slider .transparency-item{
-          min-width: 744px !important;
-      }
-      .transparency-slider-wrap{
-          overflow: hidden !important;
-      }`
-    document.head.appendChild(transparencyStyle)
-  } 
-  if (screen.width < 768) {
-    const transparencyStyle = document.createElement('style');
-    transparencyStyle.innerHTML = `
-    .transparency-slider{
-        display: -webkit-box !important;
-        display: -ms-flexbox !important;
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        transition:transform 0.5s !important;
-    }
-    .transparency-slider .transparency-item{
-        min-width: 290px !important;
-    }
-    .transparency-slider-wrap{
-        overflow: hidden !important;
-    }`
-    document.head.appendChild(transparencyStyle)
-  } 
 
   const currentInner = popupTransparencySlider.innerHTML;
   popupTransparencySlider.innerHTML = `<div class='popupTransparencyWrap'>${currentInner}</div>`;
 
-  const transparencySlider = document.querySelector('.transparency-slider');
-  const transparancyWrap = document.querySelector('.popupTransparencyWrap');
-  const arrowLeftTablet = document.querySelector('#transparency-arrow_left');
+  const transparencySlider = document.querySelector('.transparency-slider'),
+  transparancyWrap = document.querySelector('.popupTransparencyWrap'),
+  arrowLeftTablet = document.querySelector('#transparency-arrow_left');
   arrowLeftTablet.style.display = 'none';
 
   let currentWidth = +getComputedStyle(document.querySelector('.transparency-item')).minWidth.replace(/\D/g, '');

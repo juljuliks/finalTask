@@ -1,10 +1,8 @@
 const maskPhone = () => {
     let phoneInputs = document.querySelectorAll('input[name=phone]');
-
     let getInputNumbersValue = function (input) {
         return input.value.replace(/\D/g, '');
     }
-
     const onPhonePaste = function (e) {
         let input = e.target,
             inputNumbersValue = getInputNumbersValue(input);
@@ -17,7 +15,6 @@ const maskPhone = () => {
             }
         }
     }
-
     const onPhoneInput = function (e) {
         let input = e.target,
             inputNumbersValue = getInputNumbersValue(input),
@@ -27,14 +24,12 @@ const maskPhone = () => {
         if (!inputNumbersValue) {
             return input.value = "";
         }
-
         if (input.value.length != selectionStart) {
             if (e.data && /\D/g.test(e.data)) {
                 input.value = inputNumbersValue;
             }
             return;
         }
-
         if (["7", "8", "9"].indexOf(inputNumbersValue[0]) > -1) {
             if (inputNumbersValue[0] == "9") inputNumbersValue = "7" + inputNumbersValue;
             let firstSymbols = (inputNumbersValue[0] == "8") ? "8" : "+7";
@@ -54,14 +49,12 @@ const maskPhone = () => {
         }
         input.value = formattedInputValue;
     }
-
     const onPhoneKeyDown = function (e) {
         let inputValue = e.target.value.replace(/\D/g, '');
         if (e.keyCode == 8 && inputValue.length == 1) {
             e.target.value = "";
         }
     }
-    
     for (let phoneInput of phoneInputs) {
         phoneInput.addEventListener('keydown', onPhoneKeyDown);
         phoneInput.addEventListener('input', onPhoneInput);

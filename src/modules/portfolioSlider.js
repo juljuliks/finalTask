@@ -7,18 +7,16 @@ const portfolioSlider = () => {
     portfolioSlider = document.querySelector('.portfolio-slider'),
     sliderItems = Array.from(portfolioSlider.children),
     portfolioSliderMobile = document.querySelector('.portfolio-slider-mobile'),
-    sliderItemsMobile = Array.from(portfolioSliderMobile.children);
+    sliderItemsMobile = Array.from(portfolioSliderMobile.children),
+    total = portfolio.querySelector('.slider-counter-content__total'),
+    width = sliderItems[0].offsetWidth,
+    widthMobile = 352;
 
   arrowRight.style.display = 'flex'
-  const total = portfolio.querySelector('.slider-counter-content__total')
   total.innerText = sliderItemsMobile.length
-  let current = portfolio.querySelector('.slider-counter-content__current');
-  let count = 1;
-
-  const width = sliderItems[0].offsetWidth;
-  const widthMobile = 352;
-
-  let currentPosition = 0;
+  let current = portfolio.querySelector('.slider-counter-content__current'),
+    count = 1,
+    currentPosition = 0;
 
   mobileRightBtn.style.display = 'none'
   mobileLeftBtn.style.zIndex = '20';
@@ -47,7 +45,7 @@ const portfolioSlider = () => {
   })
   const portfolioWrap = document.querySelectorAll('.portfolio-wrap')[1];
   const portfolioWrapMobiile = document.querySelectorAll('.portfolio-wrap')[0];
-  
+
   const portfolioSliderHandler = (e) => {
     if (e.target.closest('#portfolio-arrow_right')) {
       count++
@@ -91,11 +89,6 @@ const portfolioSlider = () => {
       portfolioWrapMobiile.style.transform = `translateX(${-currentPosition}px)`
     }
   }
-
-
   portfolio.addEventListener('click', portfolioSliderHandler)
 }
-
-
-
 export default portfolioSlider;

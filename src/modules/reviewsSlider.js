@@ -1,7 +1,9 @@
 const reviewsSlider = () => {
-  const reviewsBlock = document.querySelector('.reviews');
-  let width = document.querySelector('.reviews-slider__slide').offsetWidth;
-  let style = document.createElement('style');
+  const reviewsBlock = document.querySelector('.reviews'),
+        arrowLeft = document.querySelector('#reviews-arrow_left'),
+        arrowRight = document.querySelector('#reviews-arrow_right'),
+        width = document.querySelector('.reviews-slider__slide').offsetWidth,
+        style = document.createElement('style');
   style.innerHTML = `
     .reviewWrap{
         position: relative;
@@ -19,8 +21,6 @@ const reviewsSlider = () => {
   document.querySelectorAll('.reviews-slider__slide').forEach(el => el.classList.add('reviewItem'))
 
   const reviewWrapper = document.querySelector('.reviewWrap');
-  const arrowLeft = document.querySelector('#reviews-arrow_left');
-  const arrowRight = document.querySelector('#reviews-arrow_right');
   arrowLeft.style.display = 'none';
 
   let currentPosition = 0;
@@ -43,8 +43,4 @@ const reviewsSlider = () => {
   }
   reviewsBlock.addEventListener('click', rewiewsBlockHandler)
 }
-
-
-
-
 export default reviewsSlider;

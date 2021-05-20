@@ -16,14 +16,11 @@ const repairTypesRenderData = () => {
     .catch((error) => {
       console.error(error)
     })
-
-
   const start = () => {
     document.querySelectorAll('.popup-repair-types-nav__item').forEach(el => {
       el.addEventListener('click', startRender)
     })
   }
-
   const startRender = (e) => {
     document.querySelectorAll('.mobile-row').forEach(el => el.remove())
     let currentBlock = document.querySelector('.popup-repair-types-content-table').querySelector('tbody')
@@ -38,7 +35,6 @@ const repairTypesRenderData = () => {
       }
     }
   }
-
   const createTable = (name, price, selector, unitsM = 'm', unitsPow = '2') => {
     let block = document.createElement('tr');
     block.innerHTML = `<tr class="mobile-row">
@@ -50,10 +46,5 @@ const repairTypesRenderData = () => {
                     </tr>`
     selector.appendChild(block)
   }
-
 }
-
-
-
-
 export default repairTypesRenderData;

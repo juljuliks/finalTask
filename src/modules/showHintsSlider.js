@@ -1,8 +1,9 @@
 const showHintsSlider = () => {
-  const formula = document.querySelector('.formula');
-  const arrowLeft = document.querySelector('#formula-arrow_left');
-  const arrowRight = document.querySelector('#formula-arrow_right');
-  const style = document.createElement('style');
+  const formula = document.querySelector('.formula'),
+        arrowLeft = document.querySelector('#formula-arrow_left'),
+        arrowRight = document.querySelector('#formula-arrow_right'),
+        style = document.createElement('style');
+        
   style.innerHTML = `
     .formulaSliderWrap{
     overflow:hidden  !important;
@@ -29,14 +30,13 @@ const showHintsSlider = () => {
   }`
 
   document.head.appendChild(style);
-
   document.querySelector('.formula-slider-wrap').classList.add('formulaSliderWrap')
   document.querySelector('.formula-slider').classList.add('formulaSlider')
   document.querySelectorAll('.formula-slider__slide').forEach(el => el.classList.add('formulaSlider-slide'))
-  let items = document.querySelectorAll('.formulaSlider-slide');
-  let slider = document.querySelector('.formula-slider');
-  let currentItem = 0;
-  let currentPosition = 0;
+  let items = document.querySelectorAll('.formulaSlider-slide'),
+      slider = document.querySelector('.formula-slider'),
+      currentItem = 0,
+      currentPosition = 0;
   items[0].classList.add('active-item')
   const cleaner = () => {
     items.forEach(el => el.classList.remove('active-item'))
