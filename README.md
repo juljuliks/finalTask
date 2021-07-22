@@ -1,1 +1,1 @@
-https://juljuliks.github.io/finalTask/
+ https://juljuliks.github.io/relaxLife-website/
